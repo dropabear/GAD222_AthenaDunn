@@ -31,7 +31,7 @@ public class CatNavNPC : MonoBehaviour
 
         agent.speed = moveSpeed;
         agent.angularSpeed = rotationSpeed;
-        agent.updateRotation = false; // we handle rotation manually
+        agent.updateRotation = false; // handle rotation manually
 
         PickNewTarget();
     }
