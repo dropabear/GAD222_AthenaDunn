@@ -17026,10 +17026,6 @@ MonoBehaviour:
   holdPoint: {fileID: 1552547958}
   interactKey: 101
   showDebugRay: 1
-  floatingTextPrefab: {fileID: 8675892730171278616, guid: b53fd9abec3a9be419ee2607371d31f3, type: 3}
-  textOffset: {x: 0, y: 2, z: 0}
-  textLifetime: 1.5
-  ftManager: {fileID: 0}
 --- !u!4 &414622766 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4459864850019384738, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
@@ -83294,7 +83290,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1990606570}
   - component: {fileID: 1990606569}
-  - component: {fileID: 1990606571}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -83330,22 +83325,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1990606571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1990606568}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b12aedb121798e940ab87036389f805a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FloatingTextManager
-  playerCamera: {fileID: 462156282}
-  floatingTextPrefab: {fileID: 8675892730171278616, guid: b53fd9abec3a9be419ee2607371d31f3, type: 3}
-  textOffset: {x: 0, y: 0.2, z: 0}
-  textLifetime: 0
 --- !u!4 &1992098890 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1490849379766892529, guid: b8217b9c1183a5144b666d1dd63980c4, type: 3}

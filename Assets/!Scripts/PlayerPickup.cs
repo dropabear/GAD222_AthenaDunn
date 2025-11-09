@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class PlayerPickup : MonoBehaviour
 {
@@ -11,8 +12,21 @@ public class PlayerPickup : MonoBehaviour
     [Header("Debug Settings")]
     public bool showDebugRay = true;
 
+    [Header("Floating Text Settings")]
+    public GameObject floatingTextPrefab; // 3D TextMeshPro prefab
+    public Vector3 textOffset = new Vector3(0, 2f, 0); // offset above object
+    public float textLifetime = 1.5f;
+
     private PickupObject heldObject;
     private GameObject lastLookedAt;
+    private GameObject currentFloatingText;
+
+    public FloatingTextManager ftManager;
+
+    void Start()
+    {
+        ftManager = FindObjectOfType<FloatingTextManager>();
+    }
 
     void Update()
     {
@@ -37,15 +51,35 @@ public class PlayerPickup : MonoBehaviour
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit, pickupRange))
         {
             GameObject currentLook = hit.collider.gameObject;
+
             if (currentLook != lastLookedAt)
             {
                 lastLookedAt = currentLook;
                 Debug.Log($"Looking at: {currentLook.name}");
+
+                // Determine label
+                string label = "";
+                PickupObject pickup = currentLook.GetComponent<PickupObject>();
+                PlacementBox box = currentLook.GetComponent<PlacementBox>();
+
+                if (pickup != null)
+                    label = "Press E to pick up";
+                else if (box != null)
+                    label = $"Press E to place inside ({box.ObjectCount}/{box.requiredItemCount})";
+
+                if (ftManager != null)
+                {
+                    if (!string.IsNullOrEmpty(label))
+                        ftManager.ShowText(currentLook.transform, label);
+                    else
+                        ftManager.ClearText();
+                }
             }
         }
         else if (lastLookedAt != null)
         {
             lastLookedAt = null;
+            ftManager?.ClearText();
         }
     }
 
@@ -91,8 +125,8 @@ public class PlayerPickup : MonoBehaviour
                     rb.detectCollisions = true;
                 }
 
-                // Resize if any dimension is larger than max
-                Vector3 maxScale = Vector3.one; // x:1, y:1, z:1
+                // Resize large objects
+                Vector3 maxScale = Vector3.one;
                 Vector3 currentScale = heldObject.transform.localScale;
                 if (currentScale.x > maxScale.x || currentScale.y > maxScale.y || currentScale.z > maxScale.z)
                 {
@@ -128,6 +162,7 @@ public class PlayerPickup : MonoBehaviour
         heldObject = null;
     }
 }
+
 
 
 
